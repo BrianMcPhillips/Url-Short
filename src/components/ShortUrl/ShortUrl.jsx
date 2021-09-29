@@ -18,13 +18,16 @@ export default class ShortUrl extends Component {
   }
 
   render() {
-    const { longUrl } = this.state;
+    const { longUrl, shortUrl } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={longUrl} onChange={this.handleChange} />
           <button>Get Short Url</button>
         </form>
+        {
+          shortUrl && <a href={shortUrl}>{shortUrl}</a>
+        }
       </div>
     );
   }
