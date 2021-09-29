@@ -11,11 +11,10 @@ export default class ShortUrl extends Component {
     this.setState({ longUrl: target.value });
   }
 
-  handleSubmit = event => {
+  handleSubmit = async(event) => {
     event.preventDefault();
-    console.log(this.state.longUrl);
-    shortener(this.state.longUrl)
-      .then(shortUrl => this.setState({ shortUrl }));
+    const shortUrl = await shortener(this.state.longUrl);
+    this.setState({ shortUrl });
   }
 
   render() {
