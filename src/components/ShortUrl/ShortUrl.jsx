@@ -12,13 +12,16 @@ export default class ShortUrl extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log(this.state.longUrl);
-    fetch('https://cleanuri.com/api/v1/shorten', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: `url=${this.state.longUrl}`
-    })
+    fetch(
+      // eslint-disable-next-line max-len
+      'https://cors-anywhere.herokuapp.com/https://cleanuri.com/api/v1/shorten', 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `url=${this.state.longUrl}`
+      })
       .then(res => res.json())
       .then(console.log);
   }
