@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { shortener } from '../../services/url-shortener';
 
 export default class ShortUrl extends Component {
   state = {
-    longUrl: ''
+    longUrl: '',
+    shortUrl: null
   }
 
   handleChange = ({ target }) => {
@@ -12,18 +14,8 @@ export default class ShortUrl extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log(this.state.longUrl);
-    fetch(
-      // eslint-disable-next-line max-len
-      'https://cors-anywhere.herokuapp.com/https://cleanuri.com/api/v1/shorten', 
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: `url=${this.state.longUrl}`
-      })
-      .then(res => res.json())
-      .then(console.log);
+    shortener(this.state.longUrl)
+      .then(shortUrl => this.setState({ shortUrl }));
   }
 
   render() {
